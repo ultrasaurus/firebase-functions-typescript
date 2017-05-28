@@ -29,4 +29,56 @@ directory, for example:
     mkdir firebase-functions-typescript
     cd firebase-functions-typescript
    ```
-2. 
+2. Then to set up the firebase project
+```
+firebase init
+```
+3. You will be prompted to select the Firebase project you just created in the
+Console UI and choose which Firebase features you want to use.  Select 
+Functions and whatever other features you want to use, then type "n" when
+prompted to install dependencies with npm:
+```
+You're about to initialize a Firebase project in this directory:
+
+  /Users/.../functions-typescript
+
+? Which Firebase CLI features do you want to setup for this folder? Press Space to select features, then Enter
+ to confirm your choices. Functions: Configure and deploy Cloud Functions
+
+=== Project Setup
+
+First, let's associate this project directory with a Firebase project.
+You can create multiple project aliases by running firebase use --add, 
+but for now we'll just set up a default project.
+
+i  .firebaserc already has a default project, skipping
+
+=== Functions Setup
+
+A functions directory will be created in your project with a Node.js
+package pre-configured. Functions can be deployed with firebase deploy.
+
+✔  Wrote functions/package.json
+✔  Wrote functions/index.js
+? Do you want to install dependencies with npm now? No
+
+i  Writing configuration info to firebase.json...
+i  Writing project information to .firebaserc...
+
+✔  Firebase initialization complete!
+```
+4. create a `src` directory and move index.js into it (changing the suffix)
+```
+mkdir src; mv index.js src/index.ts
+```
+5. add the following dev dependencies and scripts to functions/package.json
+```
+  "devDependencies": {
+    "typescript": "^2.3.2"
+  },
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "deploy": "tsc && firebase deploy --only functions"
+  },
+```
