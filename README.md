@@ -69,7 +69,9 @@ i  Writing project information to .firebaserc...
 ```
 4. create a `src` directory and move index.js into it (changing the suffix)
 ```
-mkdir src; mv index.js src/index.ts
+cd functions
+mkdir src
+mv index.js src/index.ts
 ```
 5. add the following dev dependencies and scripts to functions/package.json
 ```
@@ -81,4 +83,39 @@ mkdir src; mv index.js src/index.ts
     "watch": "tsc --watch",
     "deploy": "tsc && firebase deploy --only functions"
   },
+```
+6. install dependencies with yarn (still in `functions` directory)
+```
+yarn install
+```
+7. create a `tsconfig.json` file:
+```
+{
+  "compilerOptions": {
+    "lib": ["es6", "es2015.promise"],
+    "module": "commonjs",
+    "noImplicitAny": false,
+    "outDir": "",
+    "sourceMap": true,
+    "target": "es5",
+    "typeRoots": [
+      "node_modules/@types"
+    ]
+  },
+  "include": [
+    "src/**/*.ts",
+    "spec/**/*.ts"
+  ]
+}
+```
+8. I like to exclude node_modules and compiled js files from git, so
+I add this to a root level `.gitignore` file
+```
+node_modules/
+jspm_packages/
+
+## ignore generated JavaScript files
+functions/**/*.js
+functions/**/*.js.map
+
 ```
