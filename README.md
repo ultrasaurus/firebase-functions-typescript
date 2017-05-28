@@ -1,7 +1,7 @@
 ## Cloud Functions for Firebase: getting started with TypeScript
 
 This is an example Firebase project for using TypeScript with 
-[Cloud Functions for Firebase](https://firebase.google.com/products/functions)
+[Cloud Functions for Firebase](https://firebase.google.com/products/functions) 
 
 Pre-requistes:
 
@@ -119,3 +119,24 @@ functions/**/*.js
 functions/**/*.js.map
 
 ```
+9. in `index.ts` remove comments around the sample function (and
+add a couple of newlines to make the output easier to see):
+```
+exports.helloWorld = functions.https.onRequest((request, response) => {
+ response.send("Hello from Firebase!\n\n");
+});
+```
+9. in `functions` directory, use the npm build script created
+above to build TypeScript files and deploy:
+```
+npm run deploy
+```
+You will see a bunch of output and at the end it will show you the URL for your deployed function.
+10. test YOUR function with curl. For mine I can do this:
+```
+curl https://us-central1-functions-typescript.cloudfunctions.net/helloWorld
+```
+
+Now start developing in TypeScript!
+
+Initial steps were based on [nice article](https://medium.com/@wcandillon/writing-cloud-functions-with-typescript-61d86e282752) by [@wcandillon](https://twitter.com/wcandillon) which
